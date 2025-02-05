@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta property="og:title" content="Waves Movies">  
     <meta name="theme-color" content="#443ab6">  
     <meta name="msapplication-TileColor" content="#443ab6">  
     <meta property="og:image" content="/favicon.ico">  
     <meta name="description" content="Waves Movies. A fast, sleek, and seamless streaming experience."> 
-    <title>Waves Movies</title>
+    <title>Waves Movies</title>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 
@@ -253,7 +253,7 @@
   <body>
     <h1>Waves Movies</h1>
     <div id="search-container">
-      <input id="search" placeholder="What do you want to watch today?" autocomplete="off"/>
+      <input id="search" placeholder="What do you want to watch today?" autocomplete="off" />
     </div>
 
     <h2 id="popular-header">Popular Movies</h2>
@@ -290,6 +290,9 @@
       const loadingScreen = document.getElementById("loading");
       const noMoviesMessage = document.getElementById("no-movies");
 
+      // AbortController for managing ongoing search requests
+      let searchAbortController = null;
+
       function updateContainerWithAnimation(container, updateCallback) {
         container.style.opacity = 0;
         setTimeout(() => {
@@ -298,12 +301,12 @@
         }, 300);
       }
 
-      async function fetchMovies(url, container, showLoading = true) {
+      async function fetchMovies(url, container, showLoading = true, signal) {
         if (showLoading) {
           loadingScreen.style.display = "block";
         }
         try {
-          const response = await fetch(url);
+          const response = await fetch(url, { signal });
           const data = await response.json();
           if (data.results.length === 0) {
             noMoviesMessage.style.display = "block";
@@ -314,7 +317,10 @@
             });
           }
         } catch (error) {
-          alert("Failed to fetch movies.");
+          // Only alert if the error was not due to the request being aborted
+          if (error.name !== "AbortError") {
+            alert("Failed to fetch movies.");
+          }
         } finally {
           loadingScreen.style.display = "none";
         }
@@ -357,58 +363,68 @@
         });
       }
 
-function showModal(title, overview, movieId) {
-  const MAX_OVERVIEW_LENGTH = 150;
-  modalOverlay.classList.add("show");
-  document.getElementById("movie-title").textContent = title;
-  const detailsElem = document.getElementById("movie-details");
-  detailsElem.innerHTML = "";
-  const textContainer = document.createElement("span");
-  if (overview.length > MAX_OVERVIEW_LENGTH) {
-    const truncatedText = overview.substring(0, MAX_OVERVIEW_LENGTH);
-    textContainer.textContent = truncatedText + '... ';
-    const readMoreLink = document.createElement("span");
-    readMoreLink.textContent = "Read more";
-    readMoreLink.style.color = "#fff";
-    readMoreLink.style.cursor = "pointer";
-    readMoreLink.style.textDecoration = "none";
-    readMoreLink.addEventListener("click", () => {
-      if (readMoreLink.textContent === "Read more") {
-        textContainer.textContent = overview + ' ';
-        readMoreLink.textContent = "Show less";
-        textContainer.appendChild(readMoreLink);
-      } else {
-        textContainer.textContent = truncatedText + '... ';
-        readMoreLink.textContent = "Read more";
-        textContainer.appendChild(readMoreLink);
+      function showModal(title, overview, movieId) {
+        const MAX_OVERVIEW_LENGTH = 150;
+        modalOverlay.classList.add("show");
+        document.getElementById("movie-title").textContent = title;
+        const detailsElem = document.getElementById("movie-details");
+        detailsElem.innerHTML = "";
+        const textContainer = document.createElement("span");
+        if (overview.length > MAX_OVERVIEW_LENGTH) {
+          const truncatedText = overview.substring(0, MAX_OVERVIEW_LENGTH);
+          textContainer.textContent = truncatedText + '... ';
+          const readMoreLink = document.createElement("span");
+          readMoreLink.textContent = "Read more";
+          readMoreLink.style.color = "#fff";
+          readMoreLink.style.cursor = "pointer";
+          readMoreLink.style.textDecoration = "none";
+          readMoreLink.addEventListener("click", () => {
+            if (readMoreLink.textContent === "Read more") {
+              textContainer.textContent = overview + ' ';
+              readMoreLink.textContent = "Show less";
+              textContainer.appendChild(readMoreLink);
+            } else {
+              textContainer.textContent = truncatedText + '... ';
+              readMoreLink.textContent = "Read more";
+              textContainer.appendChild(readMoreLink);
+            }
+          });
+          textContainer.appendChild(readMoreLink);
+        } else {
+          textContainer.textContent = overview;
+        }
+        detailsElem.appendChild(textContainer);
+        const iframe = document.getElementById("player");
+        iframe.src = `https://www.vidlink.pro/movie/${movieId}?autoplay=false`;
       }
-    });
-    textContainer.appendChild(readMoreLink);
-  } else {
-    textContainer.textContent = overview;
-  }
-  detailsElem.appendChild(textContainer);
-  const iframe = document.getElementById("player");
-  iframe.src = `https://www.vidlink.pro/movie/${movieId}?autoplay=false`;
-}
 
       closeBtn.addEventListener("click", () => {
         modalOverlay.classList.remove("show");
         document.getElementById("player").src = "";
       });
 
-      searchInput.addEventListener("input", async () => {
-        if (searchInput.value.trim() === "") {
+      searchInput.addEventListener("input", () => {
+        if (searchAbortController) {
+          searchAbortController.abort();
+        }
+        searchAbortController = new AbortController();
+
+        const query = searchInput.value.trim();
+        if (query === "") {
+          resultsContainer.innerHTML = "";
+          noMoviesMessage.style.display = "none";
           popularHeader.style.display = "block";
           popularContainer.style.display = "flex";
-          resultsContainer.innerHTML = "";
         } else {
           popularHeader.style.display = "none";
           popularContainer.style.display = "none";
+          resultsContainer.innerHTML = "";
+          noMoviesMessage.style.display = "none";
           fetchMovies(
-            `${API_URL}/search/movie?api_key=${API_KEY}&query=${searchInput.value}`,
+            `${API_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`,
             resultsContainer,
-            false
+            false,
+            searchAbortController.signal
           );
         }
       });
@@ -419,4 +435,4 @@ function showModal(title, overview, movieId) {
       );
     </script>
   </body>
-</html> 
+</html>
