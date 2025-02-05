@@ -357,13 +357,18 @@
         });
       }
 
-      function showModal(title, overview, movieId) {
-        modalOverlay.classList.add("show");
-        document.getElementById("movie-title").textContent = title;
-        document.getElementById("movie-details").textContent = overview;
-        const iframe = document.getElementById("player");
-        iframe.src = `https://www.vidlink.pro/movie/${movieId}?autoplay=false`;
-      }
+    function showModal(title, overview, movieId) {
+  const MAX_OVERVIEW_LENGTH = 100; 
+  if (overview.length > MAX_OVERVIEW_LENGTH) {
+    overview = overview.substring(0, MAX_OVERVIEW_LENGTH) + '...';
+  }
+  
+  modalOverlay.classList.add("show");
+  document.getElementById("movie-title").textContent = title;
+  document.getElementById("movie-details").textContent = overview;
+  const iframe = document.getElementById("player");
+  iframe.src = `https://www.vidlink.pro/movie/${movieId}?autoplay=false`;
+}
 
       closeBtn.addEventListener("click", () => {
         modalOverlay.classList.remove("show");
