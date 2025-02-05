@@ -3,11 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta property="og:title" content="Waves Movies">  
-    <meta name="theme-color" content="#443ab6">  
-    <meta name="msapplication-TileColor" content="#443ab6">  
-    <meta property="og:image" content="/favicon.ico">  
-    <meta name="description" content="Waves Movies. A fast, sleek, and seamless streaming experience."> 
+    <meta property="og:title" content="Waves Movies" />
+    <meta name="theme-color" content="#443ab6" />
+    <meta name="msapplication-TileColor" content="#443ab6" />
+    <meta property="og:image" content="/favicon.ico" />
+    <meta
+      name="description"
+      content="Waves Movies. A fast, sleek, and seamless streaming experience."
+    />
     <title>Waves Movies</title>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
@@ -24,6 +27,9 @@
         font-family: "Poppins", sans-serif;
         text-align: center;
         overflow-x: hidden;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
       }
 
       h1 {
@@ -59,6 +65,13 @@
         box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
       }
 
+      .main-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 30px; 
+      }
+
       .results,
       .popular-movies {
         display: flex;
@@ -81,7 +94,6 @@
         cursor: pointer;
         transition: transform 0.4s ease;
         opacity: 0;
-        margin-bottom: 20px;
         animation: fadeIn 0.5s forwards;
       }
 
@@ -254,13 +266,18 @@
   <body>
     <h1>Waves Movies</h1>
     <div id="search-container">
-      <input id="search" placeholder="What do you want to watch today?" autocomplete="off" />
+      <input
+        id="search"
+        placeholder="What do you want to watch today?"
+        autocomplete="off"
+      />
     </div>
 
-    <h2 id="popular-header">Popular Movies</h2>
-    <div class="popular-movies"></div>
-
-    <div class="results"></div>
+    <div class="main-content">
+      <h2 id="popular-header">Popular Movies</h2>
+      <div class="popular-movies"></div>
+      <div class="results"></div>
+    </div>
 
     <div id="modal-overlay">
       <div id="modal-content">
@@ -291,7 +308,6 @@
       const loadingScreen = document.getElementById("loading");
       const noMoviesMessage = document.getElementById("no-movies");
 
-      // AbortController for managing ongoing search requests
       let searchAbortController = null;
 
       function updateContainerWithAnimation(container, updateCallback) {
@@ -318,7 +334,6 @@
             });
           }
         } catch (error) {
-          // Only alert if the error was not due to the request being aborted
           if (error.name !== "AbortError") {
             alert("Failed to fetch movies.");
           }
@@ -373,7 +388,7 @@
         const textContainer = document.createElement("span");
         if (overview.length > MAX_OVERVIEW_LENGTH) {
           const truncatedText = overview.substring(0, MAX_OVERVIEW_LENGTH);
-          textContainer.textContent = truncatedText + '... ';
+          textContainer.textContent = truncatedText + "... ";
           const readMoreLink = document.createElement("span");
           readMoreLink.textContent = "Read more";
           readMoreLink.style.color = "#fff";
@@ -381,11 +396,11 @@
           readMoreLink.style.textDecoration = "none";
           readMoreLink.addEventListener("click", () => {
             if (readMoreLink.textContent === "Read more") {
-              textContainer.textContent = overview + ' ';
+              textContainer.textContent = overview + " ";
               readMoreLink.textContent = "Show less";
               textContainer.appendChild(readMoreLink);
             } else {
-              textContainer.textContent = truncatedText + '... ';
+              textContainer.textContent = truncatedText + "... ";
               readMoreLink.textContent = "Read more";
               textContainer.appendChild(readMoreLink);
             }
@@ -422,7 +437,9 @@
           resultsContainer.innerHTML = "";
           noMoviesMessage.style.display = "none";
           fetchMovies(
-            `${API_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`,
+            `${API_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
+              query
+            )}`,
             resultsContainer,
             false,
             searchAbortController.signal
