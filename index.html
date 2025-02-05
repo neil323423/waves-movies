@@ -369,9 +369,9 @@ function showModal(title, overview, movieId) {
     textContainer.textContent = truncatedText + '... ';
     const readMoreLink = document.createElement("span");
     readMoreLink.textContent = "Read more";
-    readMoreLink.style.color = "#00f";
+    readMoreLink.style.color = "#fff";
     readMoreLink.style.cursor = "pointer";
-    readMoreLink.style.textDecoration = "underline";
+    readMoreLink.style.textDecoration = "none";
     readMoreLink.addEventListener("click", () => {
       if (readMoreLink.textContent === "Read more") {
         textContainer.textContent = overview + ' ';
