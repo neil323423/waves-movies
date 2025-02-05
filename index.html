@@ -357,15 +357,37 @@
         });
       }
 
-    function showModal(title, overview, movieId) {
-  const MAX_OVERVIEW_LENGTH = 100; 
-  if (overview.length > MAX_OVERVIEW_LENGTH) {
-    overview = overview.substring(0, MAX_OVERVIEW_LENGTH) + '...';
-  }
-  
+function showModal(title, overview, movieId) {
+  const MAX_OVERVIEW_LENGTH = 150;
   modalOverlay.classList.add("show");
   document.getElementById("movie-title").textContent = title;
-  document.getElementById("movie-details").textContent = overview;
+  const detailsElem = document.getElementById("movie-details");
+  detailsElem.innerHTML = "";
+  const textContainer = document.createElement("span");
+  if (overview.length > MAX_OVERVIEW_LENGTH) {
+    const truncatedText = overview.substring(0, MAX_OVERVIEW_LENGTH);
+    textContainer.textContent = truncatedText + '... ';
+    const readMoreLink = document.createElement("span");
+    readMoreLink.textContent = "Read more";
+    readMoreLink.style.color = "#00f";
+    readMoreLink.style.cursor = "pointer";
+    readMoreLink.style.textDecoration = "underline";
+    readMoreLink.addEventListener("click", () => {
+      if (readMoreLink.textContent === "Read more") {
+        textContainer.textContent = overview + ' ';
+        readMoreLink.textContent = "Show less";
+        textContainer.appendChild(readMoreLink);
+      } else {
+        textContainer.textContent = truncatedText + '... ';
+        readMoreLink.textContent = "Read more";
+        textContainer.appendChild(readMoreLink);
+      }
+    });
+    textContainer.appendChild(readMoreLink);
+  } else {
+    textContainer.textContent = overview;
+  }
+  detailsElem.appendChild(textContainer);
   const iframe = document.getElementById("player");
   iframe.src = `https://www.vidlink.pro/movie/${movieId}?autoplay=false`;
 }
