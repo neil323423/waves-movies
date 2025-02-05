@@ -1,224 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Waves Movies</title>
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:title" content="Waves Movies">  
+    <meta name="theme-color" content="#443ab6">  
+    <meta name="msapplication-TileColor" content="#443ab6">  
+    <meta property="og:image" content="/favicon.ico">  
+    <meta name="description" content="Waves Movies. A fast, sleek, and seamless streaming experience."> 
+    <title>Waves Movies</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-      body {
-        background: radial-gradient(circle, #1a1a1a, #000);
-        color: #fff;
-        font-family: "Poppins", sans-serif;
-        text-align: center;
-        overflow-x: hidden;
-      }
+      body {
+        background: radial-gradient(circle, #1a1a1a, #000);
+        color: #fff;
+        font-family: "Poppins", sans-serif;
+        text-align: center;
+        overflow-x: hidden;
+      }
 
-      h1 {
-        font-size: 42px;
-        font-weight: 600;
-        margin-bottom: 10px;
-      }
+      h1 {
+        font-size: 42px;
+        font-weight: 600;
+        margin-bottom: -20px;
+      }
 
-      #search-container {
-        display: flex;
-        margin-top: 5%;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-      }
+      #search-container {
+        display: flex;
+        margin-top: 5%;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
 
-      #search {
-        padding: 18px 20px;
-        width: 500px;
-        max-width: 90%;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 20px;
-        color: #fff;
-        font-size: 16px;
-        border: none;
-        outline: none;
-        transition: background 0.5s ease, box-shadow 0.5s ease;
-      }
+      #search {
+        padding: 18px 20px;
+        width: 500px;
+        max-width: 90%;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        color: #fff;
+        font-size: 16px;
+        border: none;
+        outline: none;
+        transition: background 0.5s ease, box-shadow 0.5s ease;
+      }
 
-      #search:hover,
-      #search:focus {
-        background: rgba(255, 255, 255, 0.2);
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-      }
+      #search:hover,
+      #search:focus {
+        background: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      }
 
-      .results,
-      .popular-movies {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-top: 30px;
-        gap: 15px;
-        transition: opacity 0.5s ease;
-      }
+      .results,
+      .popular-movies {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 30px;
+        gap: 15px;
+        transition: opacity 0.5s ease;
+      }
+      
+      #popular-header {
+        margin-top: 20px;
+      }
 
-      .movie {
-        position: relative;
-        width: 200px;
-        border-radius: 10px;
-        overflow: hidden;
-        cursor: pointer;
-        transition: transform 0.4s ease;
-        opacity: 0;
-        animation: fadeIn 0.5s forwards;
-      }
+      .movie {
+        position: relative;
+        width: 200px;
+        border-radius: 10px;
+        overflow: hidden;
+        cursor: pointer;
+        transition: transform 0.4s ease;
+        opacity: 0;
+        animation: fadeIn 0.5s forwards;
+      }
 
-      .movie img {
-        width: 100%;
-        border-radius: 10px;
-        display: block;
-      }
+      .movie img {
+        width: 100%;
+        border-radius: 10px;
+        display: block;
+      }
 
-      .movie:hover {
-        transform: scale(1.1);
-      }
+      .movie:hover {
+        transform: scale(1.1);
+      }
 
-      .movie:hover .movie-info {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      .movie:hover .movie-info {
+        opacity: 1;
+        transform: translateY(0);
+      }
 
-      .movie-info {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        padding: 10px;
-        background: rgba(0, 0, 0, 0.8);
-        opacity: 0;
-        transform: translateY(100%);
-        transition: opacity 0.3s ease, transform 0.3s ease;
-      }
+      .movie-info {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 10px;
+        background: rgba(0, 0, 0, 0.8);
+        opacity: 0;
+        transform: translateY(100%);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
 
-      .movie-info h3 {
-        font-size: 16px;
-      }
+      .movie-info h3 {
+        font-size: 16px;
+      }
 
-      .rating {
-        font-size: 14px;
-        color: gold;
-        margin-top: 4px;
-      }
+      .rating {
+        font-size: 14px;
+        color: gold;
+        margin-top: 4px;
+      }
 
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Waves Movies</h1>
-    <div id="search-container">
-      <input id="search" placeholder="What do you want to watch today?" />
-    </div>
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Waves Movies</h1>
+    <div id="search-container">
+      <input id="search" placeholder="What do you want to watch today?" autocomplete="off"/>
+    </div>
 
-    <h2 id="popular-header">Popular Movies</h2>
-    <div class="popular-movies"></div>
-    <div class="results"></div>
+    <h2 id="popular-header">Popular Movies</h2>
+    <div class="popular-movies"></div>
+    <div class="results"></div>
 
-    <div id="loading" class="loading">Loading movies...</div>
-    <div id="no-movies" class="no-movies" style="display: none;">No movies found.</div>
+    <div id="loading" class="loading">Loading movies...</div>
+    <div id="no-movies" class="no-movies" style="display: none;">No movies found.</div>
 
-    <script>
-      const API_KEY = "0e33c92186263620ce8c7f6b8fb35b00";
-      const API_URL = "https://api.themoviedb.org/3";
-      const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
-      const FALLBACK_IMAGE_URL = "https://via.placeholder.com/200x300?text=No+Cover";
+    <script>
+      const API_KEY = "0e33c92186263620ce8c7f6b8fb35b00";
+      const API_URL = "https://api.themoviedb.org/3";
+      const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
+      const FALLBACK_IMAGE_URL = "https://via.placeholder.com/200x300?text=No+Cover";
 
-      const searchInput = document.getElementById("search");
-      const resultsContainer = document.querySelector(".results");
-      const popularContainer = document.querySelector(".popular-movies");
-      const popularHeader = document.getElementById("popular-header");
-      const loadingScreen = document.getElementById("loading");
-      const noMoviesMessage = document.getElementById("no-movies");
+      const searchInput = document.getElementById("search");
+      const resultsContainer = document.querySelector(".results");
+      const popularContainer = document.querySelector(".popular-movies");
+      const popularHeader = document.getElementById("popular-header");
+      const loadingScreen = document.getElementById("loading");
+      const noMoviesMessage = document.getElementById("no-movies");
 
-      async function fetchMovies(url, container, showLoading = true) {
-        if (showLoading) {
-          loadingScreen.style.display = "block";
-        }
-        try {
-          const response = await fetch(url);
-          const data = await response.json();
-          if (data.results.length === 0) {
-            noMoviesMessage.style.display = "block";
-          } else {
-            noMoviesMessage.style.display = "none";
-            displayMovies(data.results, container);
-          }
-        } catch (error) {
-          alert("Failed to fetch movies.");
-        } finally {
-          loadingScreen.style.display = "none";
-        }
-      }
+      async function fetchMovies(url, container, showLoading = true) {
+        if (showLoading) {
+          loadingScreen.style.display = "block";
+        }
+        try {
+          const response = await fetch(url);
+          const data = await response.json();
+          if (data.results.length === 0) {
+            noMoviesMessage.style.display = "block";
+          } else {
+            noMoviesMessage.style.display = "none";
+            displayMovies(data.results, container);
+          }
+        } catch (error) {
+          alert("Failed to fetch movies.");
+        } finally {
+          loadingScreen.style.display = "none";
+        }
+      }
 
-      function displayMovies(movies, container) {
-        container.innerHTML = "";
-        movies.forEach((movie) => {
-          const movieDiv = document.createElement("div");
-          movieDiv.classList.add("movie");
+      function displayMovies(movies, container) {
+        container.innerHTML = "";
+        movies.forEach((movie) => {
+          const movieDiv = document.createElement("div");
+          movieDiv.classList.add("movie");
 
-          const movieImage = document.createElement("img");
-          movieImage.src = movie.poster_path
-            ? `${IMAGE_BASE_URL}${movie.poster_path}`
-            : FALLBACK_IMAGE_URL;
+          const movieImage = document.createElement("img");
+          movieImage.src = movie.poster_path
+            ? `${IMAGE_BASE_URL}${movie.poster_path}`
+            : FALLBACK_IMAGE_URL;
 
-          const movieInfo = document.createElement("div");
-          movieInfo.classList.add("movie-info");
+          const movieInfo = document.createElement("div");
+          movieInfo.classList.add("movie-info");
 
-          const movieTitle = document.createElement("h3");
-          movieTitle.textContent = movie.title;
+          const movieTitle = document.createElement("h3");
+          movieTitle.textContent = movie.title;
 
-          const movieRating = document.createElement("div");
-          movieRating.classList.add("rating");
-          movieRating.textContent = `⭐ ${movie.vote_average.toFixed(1)}`;
+          const movieRating = document.createElement("div");
+          movieRating.classList.add("rating");
+          movieRating.textContent = `⭐ ${movie.vote_average.toFixed(1)}`;
 
-          movieInfo.appendChild(movieTitle);
-          movieInfo.appendChild(movieRating);
-          movieDiv.appendChild(movieImage);
-          movieDiv.appendChild(movieInfo);
-          container.appendChild(movieDiv);
-        });
-      }
+          movieInfo.appendChild(movieTitle);
+          movieInfo.appendChild(movieRating);
+          movieDiv.appendChild(movieImage);
+          movieDiv.appendChild(movieInfo);
+          container.appendChild(movieDiv);
+        });
+      }
 
-      searchInput.addEventListener("input", async () => {
-        if (searchInput.value.trim() === "") {
-          popularHeader.style.display = "block";
-          popularContainer.style.display = "flex";
-          resultsContainer.innerHTML = "";
-        } else {
-          popularHeader.style.display = "none";
-          popularContainer.style.display = "none";
-          fetchMovies(
-            `${API_URL}/search/movie?api_key=${API_KEY}&query=${searchInput.value}`,
-            resultsContainer,
-            false
-          );
-        }
-      });
+      searchInput.addEventListener("input", async () => {
+        if (searchInput.value.trim() === "") {
+          popularHeader.style.display = "block";
+          popularContainer.style.display = "flex";
+          resultsContainer.innerHTML = "";
+        } else {
+          popularHeader.style.display = "none";
+          popularContainer.style.display = "none";
+          fetchMovies(
+            `${API_URL}/search/movie?api_key=${API_KEY}&query=${searchInput.value}`,
+            resultsContainer,
+            false
+          );
+        }
+      });
 
-      fetchMovies(
-        `${API_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=1`,
-        popularContainer
-      );
-    </script>
-  </body>
+      fetchMovies(
+        `${API_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=1`,
+        popularContainer
+      );
+    </script>
+  </body>
 </html>
+
+
