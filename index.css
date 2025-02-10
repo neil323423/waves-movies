@@ -1,0 +1,510 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #000;
+  color: #eee;
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+::selection {
+  background-color: #ffffff;
+  color: #000;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 30px;
+  z-index: 1020;
+  background: rgba(0, 0, 0, 0.514);
+  backdrop-filter: blur(10px);
+  animation: fadeInDown 0.8s ease both;
+  transition: background 0.5s ease, box-shadow 0.5s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.header-icon {
+  width: 34px;
+  height: 34px;
+  display: inline-block;
+}
+
+.header-title {
+  font-size: 23px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+}
+
+.fixed-search {
+  position: absolute;
+  top: 270px;
+  left: 0;
+  width: 100%;
+  padding: 20px 0;
+  z-index: 1015;
+  transition: top 0.5s ease, background 0.5s ease;
+}
+
+.fixed-search.sticky {
+  position: fixed;
+  top: 70px;
+}
+
+.fixed-search .search-container {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.fixed-search .search-container input {
+  width: 100%;
+  padding: 14px 20px 14px 50px;
+  border: 2px solid transparent;
+  border-radius: 50px;
+  font-size: 18px;
+  background: rgba(0, 0, 0, 0.514);
+  padding-left: 40px;
+  color: #eee;
+  outline: none;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.fixed-search .search-container input::placeholder {
+  font-size: 16px;
+  color: #bbb;
+}
+
+.fixed-search .search-container input:hover {
+  background: rgba(29, 29, 29, 0.514);
+}
+
+.fixed-search .search-container input:focus {
+  background: rgba(29, 29, 29, 0.514);
+}
+
+.fixed-search .search-container .search-icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  color: #bbb;
+  opacity: 0.8;
+  transition: transform 0.4s ease;
+}
+
+.fixed-search .search-container input:focus+.search-icon,
+.fixed-search .search-container input:hover+.search-icon {
+  transform: translateY(-50%) scale(1.3);
+}
+
+.hero {
+  margin-top: 140px;
+  padding: 80px 20px 40px;
+  text-align: center;
+  animation: fadeIn 1s ease both;
+}
+
+.hero h1 {
+  font-size: 30px;
+  margin-bottom: 10px;
+  color: #fff;
+  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.8);
+}
+
+.main-content {
+  padding: 40px 20px;
+  margin-top: 20px;
+  animation: fadeInUp 1s ease both;
+}
+
+.section {
+  margin-bottom: 60px;
+}
+
+.section-header {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: #fff;
+  position: relative;
+  animation: fadeIn 1s ease both;
+}
+
+.section-header::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: #fff;
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+.section-header:hover::after {
+  width: 120px;
+}
+
+.movies-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  transition: opacity 0.5s ease;
+}
+
+#search-results {
+  margin-bottom: 60px;
+  animation: fadeIn 0.8s ease both;
+}
+
+.search-info {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 16px;
+  color: #ccc;
+}
+
+.load-more {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background: #222;
+  border: none;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.load-more:hover {
+  background: #333;
+}
+
+.end-message {
+  text-align: center;
+  font-size: 16px;
+  color: #aaa;
+  margin-top: 20px;
+  opacity: 0;
+  animation: fadeIn 0.8s forwards;
+}
+
+.movie {
+  position: relative;
+  width: 210px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #222;
+  transform: scale(0.97);
+  transition: transform 0.4s ease;
+  animation: fadeIn 0.8s ease both;
+}
+
+.movie img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.movie:hover img {
+  transform: scale(1.17);
+}
+
+.movie-info {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.movie:hover .movie-info {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.movie-info h3 {
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.rating {
+  font-size: 16px;
+  color: #ccc;
+}
+
+#modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.98);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  padding: 20px;
+  z-index: 2000;
+}
+
+#modal-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+#modal-content {
+  background: #1a1a1a;
+  padding: 30px;
+  width: 100%;
+  max-width: 850px;
+  border-radius: 16px;
+  position: relative;
+  color: #eee;
+  transform: scale(0.9) translateY(20px);
+  animation: modalIn 0.5s forwards;
+}
+
+.close-btn {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  font-size: 32px;
+  background: transparent;
+  color: #eee;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.close-btn:hover {
+  transform: rotate(90deg) scale(1.1);
+  color: #ff0000;
+}
+
+#movie-title {
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: 600;
+  color: #fff;
+}
+
+#movie-details {
+  color: #ccc;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.loading {
+  font-size: 20px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.spinner {
+  width: 30px;
+  height: 30px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 10px;
+}
+
+.no-movies {
+  font-size: 18px;
+  color: #fff;
+  text-align: center;
+  margin-top: 30px;
+}
+
+#loading {
+  display: none;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.video-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+#scrollTopBtn {
+  display: none;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.514);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  padding: 10px 15px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#scrollTopBtn:hover {
+  transform: scale(1.2);
+  background: rgba(29, 29, 29, 0.514);
+  opacity: 0.8;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .header-title {
+    font-size: 22px;
+  }
+
+  .hero h1 {
+    font-size: 25px;
+  }
+
+  .fixed-search .search-container input {
+    font-size: 16px;
+    padding: 12px 18px 12px 44px;
+  }
+
+  .movie {
+    width: 180px;
+  }
+
+  .movie-info h3 {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-title {
+    font-size: 20px;
+  }
+
+  .hero h1 {
+    font-size: 20px;
+  }
+
+  .fixed-search .search-container input {
+    font-size: 14px;
+    padding: 10px 14px 10px 40px;
+  }
+
+  .movie {
+    width: 150px;
+  }
+
+  .movie-info h3 {
+    font-size: 14px;
+  }
+}
