@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+we@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 
 * {
   margin: 0;
@@ -470,6 +470,7 @@ body::-webkit-scrollbar {
 
   .hero h1 {
     font-size: 25px;
+    margin-bottom: 40px;
   }
 
   .fixed-search .search-container input {
@@ -493,6 +494,7 @@ body::-webkit-scrollbar {
 
   .hero h1 {
     font-size: 20px;
+    margin-bottom: 40px;
   }
 
   .fixed-search .search-container input {
