@@ -143,7 +143,7 @@ function showModal(title, overview, movieId) {
   }
   detailsElem.appendChild(textContainer);
   const iframe = document.getElementById("player");
-  iframe.src = `https://moviesapi.club/movie/${movieId}?autoplay=true`;
+  iframe.src = `https://vidlink.pro/movie/${movieId}?autoplay=true`;
   updateRecentlyWatched(movieId);
 }
 
