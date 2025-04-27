@@ -1,116 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta property="og:title" content="Waves Movies"/>
-  <meta name="theme-color" content="#000000"/>
-  <meta name="msapplication-TileColor" content="#000000"/>
-  <meta property="og:image" content="/assets/images/favicon.ico"/>
-  <meta name="description" content="Waves Movies. A fast, sleek, and seamless streaming experience."/>
-  <title>Waves Movies.</title>
-  <link href="https://cdn.jsdelivr.net/gh/aquawolf04/font-awesome-pro@5cd1511/css/all.css" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/index.css"/>
-  <script src="/assets/index.js" defer></script>
-</head>
-<body>
-  <header class="header">
-    <img src="/assets/images/favicon.ico" alt="Site Icon" class="header-icon"/>
-    <div class="header-title">Waves Movies.</div>
-  </header>
-
-  <div class="fixed-search">
-    <div class="search-container">
-      <input id="search" placeholder="What would you like to watch?" autocomplete="off" aria-label="Search movies"/>
-    </div>
-  </div>
-
-  <section class="hero">
-    <h1>Welcome!</h1>
-  </section>
-
-  <div class="main-content">
-    <div class="section" id="search-results" style="display:none">
-      <div class="search-info" id="search-info"></div>
-      <div class="movies-grid results"></div>
-      <button class="load-more" id="loadMoreBtn" style="display:none">Load More</button>
-      <div class="end-message" id="endMessage" style="display:none">
-        Oh no, you've reached the end... 😢
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta property="og:title" content="Waves Movies" />
+      <meta name="theme-color" content="#000000" />
+      <meta name="msapplication-TileColor" content="#000000" />
+      <meta property="og:image" content="/favicon.ico" />
+      <meta name="description" content="Waves Movies. A fast, sleek, and seamless streaming experience." />
+      <title>Waves Movies</title>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+      <link rel="stylesheet" href="index.css" />
+      <meta property="og:title" content="Waves Movies" />
+      <meta name="theme-color" content="#000000" />
+      <meta name="msapplication-TileColor" content="#000000" />
+      <meta property="og:image" content="/favicon.ico" />
+      <meta name="description" content="Waves Movies. A fast, sleek, and seamless streaming experience." />
+      <title>Waves Movies</title>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+      <script type='text/javascript' src='//pl26200262.effectiveratecpm.com/f0/e8/15/f0e81559842363ebf19aa99900ff2d02.js'></script>
+      <script type='text/javascript' src='//pl26200346.effectiveratecpm.com/08/db/84/08db842da9b43ad3d13c14634f9fd1c8.js'></script>
+   </head>
+   <body>
+      <script src="index.js" defer></script>
+      <header class="header">
+         <img src="favicon.ico" alt="Site Icon" class="header-icon" />
+         <div class="header-title">Waves Movies</div>
+      </header>
+      <div class="fixed-search">
+         <div class="search-container">
+            <input id="search" placeholder="Discover movies..." autocomplete="off" aria-label="Search movies" />
+            <span class="search-icon">
+            <i class="fas fa-search"></i>
+            </span>
+         </div>
       </div>
-      <div id="no-movies" class="no-movies" style="display:none">No movies found.</div>
-    </div>
-
-    <div id="other-sections">
-      <div class="section" id="favorites" style="display:none">
-        <h2 class="section-header">Favorites</h2>
-        <div class="movies-grid favorites-movies"></div>
+      <section class="hero">
+         <h1>What would you like to watch?</h1>
+      </section>
+      <div class="main-content">
+         <div class="section" id="search-results" style="display: none;">
+            <div class="search-info" id="search-info"></div>
+            <div class="movies-grid results"></div>
+            <button class="load-more" id="loadMoreBtn" style="display: none;">
+            Load More
+            </button>
+            <div class="end-message" id="endMessage" style="display: none;">
+               Oh no, you've reached the end... <i class="fas fa-sad-tear"></i>
+            </div>
+            <div id="no-movies" class="no-movies" style="display: none;">
+               No movies found.
+            </div>
+         </div>
+         <div id="other-sections">
+            <div class="section" id="favorites" style="display: none;">
+               <h2 class="section-header">Favorites</h2>
+               <div class="movies-grid favorites-movies"></div>
+            </div>
+            <div class="section" id="recommendations" style="display: none;">
+               <h2 class="section-header">Recommendations</h2>
+               <div class="movies-grid recommendations"></div>
+            </div>
+            <div class="section" id="popular">
+               <h2 class="section-header">Popular Movies</h2>
+               <div class="movies-grid popular-movies"></div>
+            </div>
+            <div class="section" id="top-rated">
+               <h2 class="section-header">Top Rated Movies</h2>
+               <div class="movies-grid top-rated-movies"></div>
+            </div>
+            <div class="section" id="upcoming">
+               <h2 class="section-header">Upcoming Movies</h2>
+               <div class="movies-grid upcoming-movies"></div>
+            </div>
+         </div>
       </div>
-
-      <div class="section" id="recommendations" style="display:none">
-        <h2 class="section-header">Recommendations</h2>
-        <div class="slider-container">
-          <button class="slider-btn prev" aria-label="Previous">
-            <i class="fa-solid fa-arrow-left"></i>
-          </button>
-          <div class="slider-track recommendations"></div>
-          <button class="slider-btn next" aria-label="Next">
-            <i class="fa-solid fa-arrow-right"></i>
-          </button>
-        </div>
+      <div id="modal-overlay">
+         <div id="modal-content">
+            <button class="close-btn" id="close-btn">&times;</button>
+            <h2 id="movie-title"></h2>
+            <p id="movie-details"></p>
+            <div class="video-container">
+               <iframe id="player" allow="autoplay; fullscreen"></iframe>
+            </div>
+         </div>
       </div>
-
-      <div class="section" id="popular">
-        <h2 class="section-header">Popular Movies</h2>
-        <div class="slider-container">
-          <button class="slider-btn prev" aria-label="Previous">
-            <i class="fa-solid fa-arrow-left"></i>
-          </button>
-          <div class="slider-track popular-movies"></div>
-          <button class="slider-btn next" aria-label="Next">
-            <i class="fa-solid fa-arrow-right"></i>
-          </button>
-        </div>
+      <div id="loading" class="loading">
+         <div class="spinner"></div>
+         Loading movies...
       </div>
-
-      <div class="section" id="top-rated">
-        <h2 class="section-header">Top Rated Movies</h2>
-        <div class="slider-container">
-          <button class="slider-btn prev" aria-label="Previous">
-            <i class="fa-solid fa-arrow-left"></i>
-          </button>
-          <div class="slider-track top-rated-movies"></div>
-          <button class="slider-btn next" aria-label="Next">
-            <i class="fa-solid fa-arrow-right"></i>
-          </button>
-        </div>
-      </div>
-      <div class="section" id="upcoming">
-        <h2 class="section-header">Upcoming Movies</h2>
-        <div class="slider-container">
-          <button class="slider-btn prev" aria-label="Previous">
-            <i class="fa-solid fa-arrow-left"></i>
-          </button>
-          <div class="slider-track upcoming-movies"></div>
-          <button class="slider-btn next" aria-label="Next">
-            <i class="fa-solid fa-arrow-right"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="overlay">
-    <div id="content">
-      <button class="close-btn" id="close-btn">&times;</button>
-      <h2 id="movie-title"></h2>
-      <p id="movie-details"></p>
-      <div class="video-container">
-         <iframe id="player"></iframe>
-      </div>
-    </div>
-  </div>
-  <div id="loading" class="loading">
-    <div class="spinner"></div>
-    Loading movies...
-  </div>
-</body>
+      <button id="scrollTopBtn" title="Go to top">&#8679;</button>
+   </body>
 </html>
