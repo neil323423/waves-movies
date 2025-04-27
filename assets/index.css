@@ -14,9 +14,9 @@ body {
   background: #000;
   color: #eee;
   font-family: "Poppins", sans-serif;
-  overflow-x: hidden;
-  min-height: 100vh;
   line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 body::-webkit-scrollbar {
@@ -24,7 +24,7 @@ body::-webkit-scrollbar {
 }
 
 ::selection {
-  background-color: #ffffff;
+  background-color: #fff;
   color: #000;
 }
 
@@ -37,18 +37,15 @@ body::-webkit-scrollbar {
   z-index: 1020;
   background: rgba(0, 0, 0, 0.514);
   backdrop-filter: blur(10px);
-  animation: fadeInDown 0.8s ease both;
-  transition: background 0.5s ease, box-shadow 0.5s ease;
+  animation: fadeInDown .5s ease both;
+  transition: background .3s ease, box-shadow .3s ease;
   display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 10px;
 }
 
 .header-icon {
   width: 34px;
   height: 34px;
-  display: inline-block;
 }
 
 .header-title {
@@ -56,23 +53,18 @@ body::-webkit-scrollbar {
   font-weight: 600;
   letter-spacing: 1px;
   color: #fff;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, .5);
   white-space: nowrap;
 }
 
 .fixed-search {
   position: absolute;
-  top: 270px;
+  top: 180px;
   left: 0;
   width: 100%;
   padding: 20px 0;
   z-index: 1015;
-  transition: top 0.5s ease, background 0.5s ease;
-}
-
-.fixed-search.sticky {
-  position: fixed;
-  top: 70px;
+  transition: top .3s ease, background .3s ease;
 }
 
 .fixed-search .search-container {
@@ -84,65 +76,48 @@ body::-webkit-scrollbar {
 .fixed-search .search-container input {
   width: 100%;
   padding: 14px 20px 14px 50px;
-  border: 2px solid transparent;
+  border: 1px solid #ffffff1a;
   border-radius: 50px;
-  font-size: 18px;
-  background: rgba(0, 0, 0, 0.514);
-  padding-left: 40px;
+  background-color: #08080894;
+  background-image: url('/assets/images/search.png');
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  background-size: 35px 35px;
   color: #eee;
+  font-size: 18px;
   outline: none;
-  transition: all 0.4s ease;
+  transition: all .2s ease;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.fixed-search .search-container input:hover,
+.fixed-search .search-container input:focus {
+  border: 1px solid #ffffff69;
 }
 
 .fixed-search .search-container input::placeholder {
+  color: #bbb;
   font-size: 16px;
-  color: #bbb;
-}
-
-.fixed-search .search-container input:hover {
-  background: rgba(29, 29, 29, 0.514);
-}
-
-.fixed-search .search-container input:focus {
-  background: rgba(29, 29, 29, 0.514);
-}
-
-.fixed-search .search-container .search-icon {
-  position: absolute;
-  left: 18px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 15px;
-  color: #bbb;
-  opacity: 0.8;
-  transition: transform 0.4s ease;
-}
-
-.fixed-search .search-container input:focus+.search-icon,
-.fixed-search .search-container input:hover+.search-icon {
-  transform: translateY(-50%) scale(1.3);
 }
 
 .hero {
-  margin-top: 140px;
+  margin-top: 50px;
   padding: 80px 20px 40px;
   text-align: center;
-  animation: fadeIn 1s ease both;
+  animation: fadeIn .6s ease both;
 }
 
 .hero h1 {
   font-size: 30px;
   margin-bottom: 10px;
   color: #fff;
-  text-shadow: 0 3px 8px rgba(0, 0, 0, 0.8);
+  text-shadow: 0 3px 8px rgba(0, 0, 0, .8);
 }
 
 .main-content {
   padding: 40px 20px;
   margin-top: 20px;
-  animation: fadeInUp 1s ease both;
+  animation: fadeInUp .6s ease both;
 }
 
 .section {
@@ -150,30 +125,28 @@ body::-webkit-scrollbar {
 }
 
 .section-header {
-  text-align: center;
+  position: relative;
   font-size: 32px;
   font-weight: 500;
-  margin-bottom: 20px;
+  margin-bottom: -25px;
   color: #fff;
-  position: relative;
-  animation: fadeIn 1s ease both;
+  animation: fadeIn .6s ease both;
 }
 
 .section-header::after {
   content: "";
   position: absolute;
   bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
   width: 80px;
   height: 4px;
   background: #fff;
   border-radius: 2px;
-  transition: width 0.5s ease;
+  transition: width .5s ease;
 }
 
 .section-header:hover::after {
-  width: 120px;
+  width: 220px;
 }
 
 .movies-grid {
@@ -181,12 +154,12 @@ body::-webkit-scrollbar {
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
-  transition: opacity 0.5s ease;
+  transition: opacity .3s ease;
 }
 
 #search-results {
   margin-bottom: 60px;
-  animation: fadeIn 0.8s ease both;
+  animation: fadeIn .6s ease both;
 }
 
 .search-info {
@@ -202,10 +175,10 @@ body::-webkit-scrollbar {
   padding: 10px 20px;
   background: #222;
   border: none;
+  border-radius: 10px;
   color: #fff;
-  border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background .3s ease;
 }
 
 .load-more:hover {
@@ -214,30 +187,31 @@ body::-webkit-scrollbar {
 
 .end-message {
   text-align: center;
-  font-size: 16px;
-  color: #aaa;
   margin-top: 20px;
   opacity: 0;
-  animation: fadeIn 0.8s forwards;
+  font-size: 16px;
+  color: #aaa;
+  animation: fadeIn .6s forwards;
 }
 
 .movie {
   position: relative;
-  width: 210px;
+  width: 180px;
+  height: 300px;
+  background: #222;
   border-radius: 12px;
   overflow: hidden;
+  transform: scale(.97);
+  transition: transform .2s ease;
   cursor: pointer;
-  background: #222;
-  transform: scale(0.97);
-  transition: transform 0.4s ease;
-  animation: fadeIn 0.8s ease both;
+  animation: fadeIn .4s ease both;
 }
 
 .movie img {
   width: 100%;
   height: 100%;
   display: block;
-  transition: transform 0.4s ease;
+  transition: transform .2s ease;
 }
 
 .movie:hover img {
@@ -249,10 +223,10 @@ body::-webkit-scrollbar {
   bottom: 0;
   width: 100%;
   padding: 12px;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+  background: linear-gradient(transparent, rgba(0, 0, 0, .9));
   opacity: 0;
   transform: translateY(100%);
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition: opacity .2s ease, transform .2s ease;
 }
 
 .movie:hover .movie-info {
@@ -271,38 +245,52 @@ body::-webkit-scrollbar {
   color: #ccc;
 }
 
-#modal-overlay {
+#overlay {
   position: fixed;
   top: 0;
+  right: 0;
+  bottom: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.98);
+  background-color: rgba(0, 0, 0, .85);
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.4s ease, visibility 0.4s ease;
-  padding: 20px;
+  transition: opacity .2s ease, visibility .2s ease;
   z-index: 2000;
 }
 
-#modal-overlay.show {
+#overlay.show {
   opacity: 1;
   visibility: visible;
 }
 
-#modal-content {
-  background: #1a1a1a;
+#content {
+  background: #0e0e0e;
   padding: 30px;
-  width: 100%;
-  max-width: 850px;
+  width: clamp(300px, 80vw, 800px);
   border-radius: 16px;
   position: relative;
   color: #eee;
-  transform: scale(0.9) translateY(20px);
-  animation: modalIn 0.5s forwards;
+  animation: in 0.3s forwards;
+  margin: 0 auto;
+  box-sizing: border-box;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#content::-webkit-scrollbar {
+  display: none;
+}
+
+#content {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .close-btn {
@@ -314,66 +302,61 @@ body::-webkit-scrollbar {
   color: #eee;
   border: none;
   cursor: pointer;
-  transition: transform 0.3s ease, color 0.3s ease;
+  transition: transform .2s ease, color .2s ease;
 }
 
 .close-btn:hover {
-  transform: rotate(90deg) scale(1.1);
-  color: #ff0000;
+  transform: rotate(90deg);
+  color: #adadad;
 }
 
 #movie-title {
-  margin-bottom: 20px;
   font-size: 28px;
   font-weight: 600;
+  margin-bottom: 5px;
   color: #fff;
 }
 
 #movie-details {
-  color: #ccc;
   font-size: 16px;
+  color: #a5a5a5;
   line-height: 1.5;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .loading {
-  font-size: 20px;
-  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 30px;
+  font-size: 20px;
+  color: #fff;
 }
 
 .spinner {
   width: 30px;
   height: 30px;
-  border: 4px solid rgba(255, 255, 255, 0.3);
+  border: 4px solid rgba(255, 255, 255, .3);
   border-top: 4px solid #fff;
   border-radius: 50%;
-  animation: spin 1s linear infinite;
+  animation: spin .7s linear infinite;
   margin-right: 10px;
 }
 
 .no-movies {
   font-size: 18px;
-  color: #fff;
   text-align: center;
   margin-top: 30px;
-}
-
-#loading {
-  display: none;
+  color: #fff;
 }
 
 .video-container {
-  position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  margin-top: 20px;
+  aspect-ratio: 16/9;
   background: #000;
   border-radius: 10px;
   overflow: hidden;
-  margin-top: 20px;
 }
 
 .video-container iframe {
@@ -382,27 +365,52 @@ body::-webkit-scrollbar {
   border: none;
 }
 
-#scrollTopBtn {
-  display: none;
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  z-index: 1000;
-  background: rgba(0, 0, 0, 0.514);
-  backdrop-filter: blur(10px);
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  padding: 10px 15px;
-  font-size: 20px;
-  cursor: pointer;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+.slider-container {
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  padding-top: 50px;
 }
 
-#scrollTopBtn:hover {
-  transform: scale(1.2);
-  background: rgba(29, 29, 29, 0.514);
-  opacity: 0.8;
+.slider-track {
+  display: flex;
+  gap: 20px;
+  transition: transform .3s ease;
+  will-change: transform;
+}
+
+.slider-btn {
+  position: absolute;
+  top: 0;
+  width: 50px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
+  transition: background-color .2s;
+}
+
+.slider-btn.prev {
+  right: 55px;
+}
+
+.slider-btn.next {
+  right: 5px;
+}
+
+.slider-btn:hover {
+  background: rgba(32, 35, 39, 1);
+}
+
+.slider-track .movie {
+  min-width: 180px;
 }
 
 @keyframes fadeIn {
@@ -410,7 +418,6 @@ body::-webkit-scrollbar {
     opacity: 0;
     transform: translateY(20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -422,7 +429,6 @@ body::-webkit-scrollbar {
     opacity: 0;
     transform: translateY(-20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -434,19 +440,17 @@ body::-webkit-scrollbar {
     opacity: 0;
     transform: translateY(20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-@keyframes modalIn {
+@keyframes in {
   from {
     opacity: 0;
-    transform: scale(0.9) translateY(20px);
+    transform: scale(.9) translateY(20px);
   }
-
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -454,11 +458,7 @@ body::-webkit-scrollbar {
 }
 
 @keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
+  to {
     transform: rotate(360deg);
   }
 }
@@ -467,21 +467,17 @@ body::-webkit-scrollbar {
   .header-title {
     font-size: 22px;
   }
-
   .hero h1 {
     font-size: 25px;
     margin-bottom: 20px;
   }
-
   .fixed-search .search-container input {
     font-size: 16px;
     padding: 12px 18px 12px 44px;
   }
-
   .movie {
     width: 180px;
   }
-
   .movie-info h3 {
     font-size: 16px;
   }
@@ -491,22 +487,21 @@ body::-webkit-scrollbar {
   .header-title {
     font-size: 20px;
   }
-
   .hero h1 {
     font-size: 20px;
     margin-bottom: 40px;
   }
-
   .fixed-search .search-container input {
     font-size: 14px;
     padding: 10px 14px 10px 40px;
   }
-
   .movie {
     width: 150px;
   }
-
   .movie-info h3 {
     font-size: 14px;
+  }
+  .slider-track .movie {
+    min-width: 150px;
   }
 }
