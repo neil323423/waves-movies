@@ -110,8 +110,6 @@ function updateSearchInfo(displayedCount,totalCount){
 function show(title, overview, movieId) {
   overlay.classList.add("show");
   document.getElementById("movie-title").textContent = title;
-  const detailsElem = document.getElementById("movie-details");
-  detailsElem.innerHTML = "";
   const container = document.createElement("span");
   const truncated = overview.substring(0, 150) + "... ";
   const textWrapper = document.createElement("span");
@@ -147,7 +145,6 @@ function show(title, overview, movieId) {
     container.appendChild(toggle);
   }
 
-  detailsElem.appendChild(container);
   document.getElementById("player").src = `https://player.vidsrc.co/embed/movie/${movieId}`;
   updateRecentlyWatched(movieId);
 }
