@@ -145,7 +145,7 @@ function show(title, overview, movieId) {
     container.appendChild(toggle);
   }
 
-  document.getElementById("player").src = `https://player.vidsrc.co/embed/movie/${movieId}?server=2`;
+  document.getElementById("player").src = `https://player.videasy.net/movie/${movieId}?color=8B5CF6`;
   updateRecentlyWatched(movieId);
 }
 
